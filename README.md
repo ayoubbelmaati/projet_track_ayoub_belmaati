@@ -1,79 +1,308 @@
-# Object-Oriented Programming in Python - the project track
+# 🎭 Deauville Festival du Rire
 
-ECE Paris - 2026-2027
+Application de gestion du programme du **Festival du Rire de Deauville**, prévu du 10 au 13 juin 2027.
 
-You learn Python by building one project, from the first line to a web
-platform: the programme of the **Deauville Festival du Rire** (10-13 June
-2027). The website is given; behind it, everything is yours. Each step adds
-one thing that works, and brings the notion that makes it possible.
+Ce projet est développé en Python dans le cadre du parcours de programmation orientée objet à l'ECE Paris.
 
-This repository holds the **sheets** of the steps and small **side examples**
-on other subjects (a library, buses, a bank…). They show a technique; your
-project is where you use it. Your code lives in **your own repository**,
-started from the starter at step 00.
+L'application permet aux organisateurs de gérer les spectacles, les artistes, les salles et les inscriptions aux ateliers. Les visiteurs peuvent consulter le programme à travers un site web.
 
-A second repository, the **practice repository**, holds more examples
-(notebooks) and exercises with tests for each block. It is optional: use it
-when a notion needs more practice. Each sheet ends with the matching part.
+## ✨ Fonctionnalités principales
 
-## The steps
+- **Gestion des artistes** : ajouter et consulter les artistes.
+- **Gestion des spectacles** : créer, modifier et annuler des spectacles.
+- **Gestion des salles** : consulter les salles et vérifier leur disponibilité.
+- **Gestion des ateliers** : inscrire des participants et contrôler les places disponibles.
+- **Consultation du programme** : filtrer les spectacles par date et par salle.
+- **Spectacles en cours** : consulter les spectacles actuellement programmés et les prochains.
+- **API REST** : accéder aux fonctionnalités du festival.
+- **Interface d'administration** : gérer les spectacles et les artistes.
+- **Interface en ligne de commande (CLI)** : utiliser les principales fonctionnalités depuis le terminal.
 
-| Block | Step                                                       | At the end of the step                                       |
-| ----- | ---------------------------------------------------------- | ------------------------------------------------------------ |
-| B1    | [00 Start](B1/E00_start.md)                                | the project runs and prints a summary of the festival        |
-|       | [01 Explore](B1/E01_explore.md)                            | six questions about the data, answered by loops              |
-|       | [02 The programme of a day](B1/E02_ask_a_day.md)           | the user asks for a day, gets its programme (with a bug)     |
-| B2    | [03 Functions and commands](B2/E03_functions.md)           | `main.py programme 2027-06-11`, on GitHub                    |
-|       | [04 Real dates and times](B2/E04_time.md)                  | the night belongs to the right day; what is on stage now     |
-|       | [05 Rules, errors and saving](B2/E05_errors_and_saving.md) | adding a show checks the rules and saves the file            |
-| B3    | [06 The website lights up](B3/E06_first_routes.md)         | a server; the website shows days, venues, artists            |
-|       | [07 The first classes](B3/E07_classes.md)                  | the programme and the artist pages appear                    |
-|       | [08 The festival object](B3/E08_festival_object.md)        | "on stage now" appears; tests prove every rule               |
-| B4    | [09 Three kinds](B4/E09_three_kinds.md)                    | solo shows, lineups, workshops: one family, no `if kind ==`  |
-|       | [10 The admin](B4/E10_admin.md)                            | organisers schedule, move, cancel; nobody bypasses the rules |
-|       | [11 A real package](B4/E11_package.md)                     | `uv run deauville serve`, `uv build`                         |
-| B5    | [12 The whole contract](B5/E12_full_contract.md)           | all of `API.md`, tested                                      |
-|       | [13 Ship it](B5/E13_ship.md)                               | a fresh clone runs; your README explains your structure      |
+### Types de spectacles
 
-Each block README lists its steps and side examples: [B1](B1/README.md),
-[B2](B2/README.md), [B3](B3/README.md), [B4](B4/README.md),
-[B5](B5/README.md).
+L'application prend en charge trois types de spectacles :
 
-## How a step works
+| Type | Description |
+|---|---|
+| Solo | Spectacle présenté par un seul artiste. |
+| Lineup | Spectacle composé d'un présentateur et de plusieurs artistes. |
+| Workshop | Atelier animé par un professeur avec un nombre limité de participants. |
 
-Each sheet has the same parts:
+## 🛠️ Technologies utilisées
 
-- **At the end**: what works when the step is done, seen from outside (an
-  output in the terminal, a page of the website).
-- **Why now**: what the previous version cannot do. The notion of the step
-  answers it.
-- **Learn**: the notion, short, and the side examples.
-- **Do**: what to build. It says _what_ must work, never _which_ functions or
-  classes to write: the structure of your project is your work, and you
-  defend it at the oral.
-- **Check**: the exact output, or what the website must show. No tests are
-  given: from step 08, you write your own.
+- **Python 3.12** : langage principal.
+- **FastAPI** : développement de l'API REST.
+- **Uvicorn** : serveur web.
+- **Pytest** : tests automatisés.
+- **Ruff** : formatage et vérification du code.
+- **JSON** : stockage des données.
+- **uv** : gestion de Python et des dépendances.
+- **HTML, CSS et JavaScript** : interfaces web.
 
-Steps not finished in class are finished at home before the next block: each
-block starts where the previous one ended.
+## 📁 Architecture du projet
 
-## Setup
+```text
+ece-poo-track/
+│
+├── B1/                     # Exercices du bloc 1
+├── B2/                     # Exercices du bloc 2
+├── B3/                     # Exercices du bloc 3
+├── B4/                     # Exercices du bloc 4
+├── B5/                     # Exercices du bloc 5
+├── Exercices/              # Solution du exercices 
+│
+├── src/
+│   └── deauville/
+│       ├── errors.py       # Gestion des erreurs
+│       ├── models.py       # Modèles : Venue, Artist, Performance
+│       ├── festival.py     # Logique métier et règles du festival
+│       ├── storage.py      # Gestion du stockage
+│       ├── api.py          # API REST avec FastAPI
+│       ├── cli.py          # Commandes en ligne de commande
+│       ├── __main__.py     # Point d'entrée du package
+│       └── web/            # Site public et interface admin
+│
+├── data/
+│   └── festival.json       # Données du festival
+│
+├── tests/                  # Tests automatisés
+│
+├── pyproject.toml          # Configuration du projet
+├── uv.lock                 # Versions des dépendances
+└── README.md               # Documentation
+```
 
-1. Install uv:
-   - macOS / Linux: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-   - Windows (PowerShell):
-     `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+### Rôle des principaux modules
 
-   Close the terminal, open a new one, check with `uv --version`.
+| Module | Responsabilité |
+|---|---|
+| `models.py` | Définition des salles, artistes et spectacles. |
+| `festival.py` | Gestion du programme et application des règles métier. |
+| `errors.py` | Définition des différentes erreurs. |
+| `storage.py` | Chargement et sauvegarde des données. |
+| `api.py` | Gestion des routes de l'API. |
+| `cli.py` | Gestion des commandes du terminal. |
 
-2. Install VS Code with the extensions _Python_ (Microsoft) and _Ruff_
-   (Astral). Keep your folders outside OneDrive.
-3. Open this folder in VS Code, then a terminal (`Terminal > New Terminal`),
-   and run `uv sync`.
-4. Side examples run from this folder:
+L'organisation sépare les règles métier, les modèles, le stockage et les interfaces. Cela facilite la maintenance et les évolutions du projet.
 
-   ```bash
-   uv run python B1/side/e00_playlist.py
-   ```
+## 🚀 Installation
 
-Then [step 00](B1/E00_start.md) creates your project, in its own folder.
+### Prérequis
+
+- Python 3.12
+- [uv](https://docs.astral.sh/uv/)
+
+### Récupérer le projet
+
+```bash
+git clone https://github.com/ayoubbelmaati/projet_track_ayoub_belmaati.git
+cd projet_track_ayoub_belmaati
+```
+
+### Installer les dépendances
+
+```bash
+uv sync
+```
+
+## ▶️ Lancement de l'application
+
+Les commandes doivent être exécutées depuis le dossier principal du projet.
+
+### Démarrer le serveur
+
+```bash
+uv run deauville serve
+```
+
+Le serveur est accessible à l'adresse :
+
+http://127.0.0.1:8000
+
+Pour utiliser un autre port :
+
+```bash
+uv run deauville serve --port 9000
+```
+
+### Accéder aux interfaces
+
+| Adresse | Description |
+|---|---|
+| http://127.0.0.1:8000/ | Site web public |
+| http://127.0.0.1:8000/admin/ | Interface d'administration |
+| http://127.0.0.1:8000/docs | Documentation interactive de l'API |
+
+## 🔌 API REST
+
+L'API permet de consulter et de gérer les informations du festival.
+
+| Méthode | Route | Description |
+|---|---|---|
+| GET | `/api/festival` | Informations générales du festival |
+| GET | `/api/venues` | Liste des salles |
+| GET | `/api/artists` | Liste des artistes |
+| GET | `/api/artists/{slug}` | Détails d'un artiste et de ses spectacles |
+| GET | `/api/programme` | Consultation du programme avec filtres |
+| GET | `/api/now` | Spectacles en cours et prochains spectacles |
+| GET | `/api/performances/{id}` | Détails d'un spectacle |
+| POST | `/api/performances` | Ajouter un spectacle |
+| PUT | `/api/performances/{id}` | Modifier un spectacle |
+| DELETE | `/api/performances/{id}` | Annuler un spectacle |
+| POST | `/api/performances/{id}/participants` | Inscrire un participant à un atelier |
+| POST | `/api/artists` | Ajouter un artiste |
+
+### Exemple de filtre du programme
+
+```http
+GET /api/programme?day=2027-06-11&venue=le-kiosque
+```
+
+Les filtres par date et par salle sont facultatifs.
+
+Pour consulter toutes les routes et tester les requêtes, utiliser la documentation Swagger :
+
+http://127.0.0.1:8000/docs
+
+## 💻 Commandes disponibles (CLI)
+
+L'application peut également être utilisée depuis le terminal.
+
+| Commande | Description |
+|---|---|
+| `uv run deauville venues` | Afficher les salles |
+| `uv run deauville artist <slug>` | Consulter un artiste |
+| `uv run deauville programme 2027-06-11` | Afficher le programme d'une journée |
+| `uv run deauville now 2027-06-11` | Afficher les spectacles en cours |
+| `uv run deauville add` | Ajouter un spectacle |
+| `uv run deauville cancel <performance-id>` | Annuler un spectacle |
+| `uv run deauville serve` | Démarrer le serveur |
+
+Il est également possible d'utiliser le module Python :
+
+```bash
+uv run python -m deauville venues
+```
+
+L'option `--data <file>` permet d'utiliser un autre fichier JSON.
+
+## ⚙️ Règles de gestion
+
+Le système vérifie plusieurs règles avant d'accepter une opération.
+
+| Règle | Description |
+|---|---|
+| Type de spectacle | Seuls les types autorisés sont acceptés. |
+| Titre | Le titre ne doit pas être vide. |
+| Durée | La durée doit être comprise entre 1 et 360 minutes. |
+| Solo | Un artiste est obligatoire. |
+| Lineup | Un présentateur et au moins deux artistes différents sont nécessaires. |
+| Workshop | Un professeur et au moins une place sont nécessaires. |
+| Participants | Seuls les ateliers acceptent des inscriptions. |
+| Doublons | Un participant ne peut pas s'inscrire deux fois au même atelier. |
+| Capacité | Le nombre de participants ne doit pas dépasser la capacité autorisée. |
+| Disponibilité | Une salle ou un artiste ne peut pas être utilisé dans deux spectacles simultanés. |
+| Dates | Les spectacles doivent respecter les dates du festival. |
+
+### Gestion des erreurs
+
+Les erreurs sont organisées en plusieurs catégories :
+
+- `InvalidError` : données invalides.
+- `NotFoundError` : élément introuvable.
+- `ConflictError` : conflit avec une règle métier.
+- `StorageError` : problème lié au stockage.
+
+L'API retourne des codes HTTP adaptés :
+
+| Code | Signification |
+|---|---|
+| 400 | Erreur générale |
+| 404 | Élément introuvable |
+| 409 | Conflit |
+| 422 | Erreur de validation |
+| 500 | Erreur interne ou problème de stockage |
+
+## 💾 Stockage des données
+
+Les données du festival sont enregistrées dans un fichier JSON.
+
+Le projet utilise une classe abstraite `Storage` qui définit deux méthodes :
+
+- `load()` : charger les données.
+- `save()` : sauvegarder les données.
+
+Deux implémentations sont disponibles :
+
+- `JsonStorage` : stockage dans un fichier JSON.
+- `MemoryStorage` : stockage en mémoire, notamment pour les tests.
+
+Cette séparation permet de faire évoluer le système de stockage sans modifier les règles métier.
+
+## 🧪 Tests et qualité du code
+
+Le projet utilise Pytest pour vérifier le bon fonctionnement des différentes fonctionnalités.
+
+### Lancer les tests
+
+```bash
+uv run pytest
+```
+
+### Formater le code
+
+```bash
+uv run ruff format .
+```
+
+### Vérifier la qualité du code
+
+```bash
+uv run ruff check .
+```
+
+### Construire le package
+
+```bash
+uv build
+```
+
+### Organisation des tests
+
+| Fichier | Description |
+|---|---|
+| `tests/test_festival.py` | Vérification des règles de gestion du programme. |
+| `tests/test_admin.py` | Vérification des modifications, annulations et inscriptions. |
+| `tests/test_storage.py` | Vérification du stockage et des fichiers JSON. |
+| `tests/test_api.py` | Vérification des routes et des réponses de l'API. |
+
+Les tests utilisent des fichiers temporaires afin de ne pas modifier les données réelles du festival.
+
+## 🔄 Améliorations possibles
+
+Plusieurs évolutions peuvent être envisagées :
+
+- Ajouter une base de données SQLite.
+- Mettre en place un système d'authentification.
+- Améliorer la gestion des utilisateurs et des droits d'accès.
+- Optimiser le chargement et la sauvegarde des données.
+- Améliorer les interfaces web.
+
+## ⚠️ Limites connues
+
+- Le fichier `data/festival.json` est recherché depuis le dossier principal du projet, sauf si un autre chemin est indiqué avec `--data`.
+- Chaque requête recharge actuellement l'ensemble des données.
+- Le verrouillage protège un seul processus serveur.
+- Les heures sont gérées en heure locale, sans conversion de fuseau horaire.
+- L'identifiant d'un spectacle dépend de sa salle et de son heure de début. Un déplacement peut donc modifier son identifiant.
+- La commande `deauville now <day>` affiche uniquement le premier spectacle lorsqu'il y en a plusieurs en cours.
+
+## 👨‍💻 Auteur
+
+**Ayoub Belmaati**
+
+Projet réalisé dans le cadre du parcours de programmation Python à l'ECE Paris.
+
+---
+
+*Deauville Festival du Rire – 10 au 13 juin 2027.*
